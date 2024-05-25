@@ -1,0 +1,22 @@
+# Installer les packages nécessaires s'ils ne sont pas déjà installés
+if (!require(ggplot2)) install.packages("ggplot2", dependencies = TRUE)
+if (!require(dplyr)) install.packages("dplyr", dependencies = TRUE)
+
+# Charger les packages
+library(ggplot2)
+library(dplyr)
+
+# Utiliser un jeu de données intégré pour l'exemple
+data("iris")
+
+# Créer le diagramme en violon avec des points superposés
+p <- ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
+  geom_violin(trim = FALSE) +
+  geom_jitter(shape = 16, position = position_jitter(0.2), color = "black", alpha = 0.6) +
+  theme_minimal() +
+  labs(title = "Diagramme en violon des longueurs de sépales des différentes espèces",
+       x = "Espèce",
+       y = "Longueur de sépale")
+
+# Afficher le graphique
+print(p)
